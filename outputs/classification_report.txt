@@ -1,0 +1,14 @@
+Wheat Leaf Disease CNN - Classification Report
+============================================================
+
+              precision    recall  f1-score   support
+
+  Brown rust     0.9626    0.8240    0.8879       125
+     Healthy     0.7876    0.9620    0.8661       158
+  Loose Smut     0.5897    0.7667    0.6667        30
+    Septoria     0.6579    0.7143    0.6849        35
+ Yellow rust     0.9910    0.7857    0.8765       140
+
+    accuracy                         0.8463       488
+   macro avg     0.7978    0.8105    0.7964       488
+weighted avg     0.8693    0.8463    0.8494       488
