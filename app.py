@@ -75,7 +75,7 @@ st.markdown(
         --surface-subtle: #f8faf8;
         --border-color: #dce7df;
         --text-dark: #14281f;
-        --text-muted: #526b5d;
+        --text-muted: #385243;
     }
 
     html, body, [class*="css"] {
@@ -87,28 +87,51 @@ st.markdown(
         color: var(--text-dark);
     }
 
+    /* Headings outside hero banners */
     h1, h2, h3, h4 {
         font-family: 'Space Grotesk', sans-serif !important;
-        color: var(--primary-deep) !important;
+        color: var(--primary-deep);
         font-weight: 700 !important;
     }
 
-    /* Main Hero Banner */
+    /* ============================================================
+       HERO BANNER - MAXIMUM CONTRAST & ACCESSIBILITY
+       ============================================================ */
     .hero-banner {
-        background: linear-gradient(135deg, #0e3728 0%, #175238 50%, #206d4b 100%);
-        color: #ffffff;
+        background: linear-gradient(135deg, #0e3728 0%, #175238 50%, #206d4b 100%) !important;
+        color: #ffffff !important;
         padding: 2.2rem 2.6rem;
         border-radius: 20px;
         margin-bottom: 2rem;
-        box-shadow: 0 12px 30px rgba(15, 61, 46, 0.15);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 12px 30px rgba(15, 61, 46, 0.18);
+        border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
+    /* Force all headings inside hero banners to crisp white */
+    .hero-banner h1,
+    .hero-banner h2,
+    .hero-banner h3,
+    .hero-banner h4,
+    .hero-banner .hero-title,
+    .hero-title {
+        color: #FFFFFF !important;
+        font-weight: 700 !important;
+        letter-spacing: -0.5px !important;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    .hero-title {
+        font-size: clamp(2rem, 3.5vw, 2.9rem) !important;
+        margin: 0 0 0.8rem 0 !important;
+        line-height: 1.2 !important;
+    }
+
+    /* Hero pill tags: high contrast white text on glassy badge */
     .hero-tag {
         display: inline-block;
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.22) !important;
         backdrop-filter: blur(8px);
-        color: #c4f3d2;
+        color: #FFFFFF !important;
         padding: 0.35rem 0.9rem;
         border-radius: 30px;
         font-size: 0.78rem;
@@ -116,21 +139,20 @@ st.markdown(
         letter-spacing: 1.5px;
         text-transform: uppercase;
         margin-bottom: 0.8rem;
+        border: 1px solid rgba(255, 255, 255, 0.35) !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     }
 
-    .hero-title {
-        color: #ffffff !important;
-        font-size: clamp(2rem, 3.5vw, 2.9rem);
-        margin: 0 0 0.8rem 0;
-        line-height: 1.2;
-    }
-
-    .hero-subtitle {
-        color: #e2f4e8;
-        font-size: 1.05rem;
+    /* Subtitle and description inside hero banners: high-contrast light mint/off-white */
+    .hero-subtitle,
+    .hero-banner p,
+    .hero-banner span:not(.hero-tag) {
+        color: #E2F1E8 !important;
+        font-size: 1.02rem;
         line-height: 1.6;
-        max-width: 820px;
+        max-width: 840px;
         margin-bottom: 0;
+        font-weight: 400;
     }
 
     /* Metric & Feature Cards */
@@ -149,15 +171,69 @@ st.markdown(
         box-shadow: 0 8px 24px rgba(18, 56, 38, 0.08);
     }
 
+    .feature-card h1,
+    .feature-card h2,
+    .feature-card h3,
+    .feature-card h4 {
+        color: #0f3d2e !important;
+    }
+
+    .feature-card p {
+        color: #2c4737 !important;
+    }
+
     .card-num {
         font-size: 0.75rem;
         font-weight: 800;
-        color: var(--primary);
+        color: #14532d;
         letter-spacing: 1.5px;
         text-transform: uppercase;
         margin-bottom: 0.4rem;
     }
 
+    /* Streamlit Metric Container - High Contrast & No Truncation */
+    [data-testid="stMetric"] {
+        background: #ffffff;
+        border: 1px solid var(--border-color);
+        border-radius: 14px;
+        padding: 1rem 1.25rem;
+        box-shadow: 0 2px 10px rgba(18, 56, 38, 0.03);
+    }
+
+    [data-testid="stMetricLabel"] {
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        overflow: visible !important;
+        text-overflow: unset !important;
+    }
+
+    [data-testid="stMetricLabel"] p,
+    [data-testid="stMetricLabel"] label {
+        font-size: 0.85rem !important;
+        font-weight: 700 !important;
+        color: #244132 !important;
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        margin: 0 !important;
+    }
+
+    [data-testid="stMetricValue"] {
+        font-size: 1.45rem !important;
+        font-weight: 800 !important;
+        color: #0f3d2e !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+        overflow-wrap: anywhere !important;
+        line-height: 1.3 !important;
+    }
+
+    [data-testid="stMetricValue"] > div {
+        white-space: normal !important;
+        word-break: break-word !important;
+        overflow-wrap: anywhere !important;
+    }
+
+    /* Severity Badges */
     .badge-confidence {
         background: #e8f5ed;
         color: #165b38;
@@ -182,18 +258,18 @@ st.markdown(
 
     .badge-severity-moderate {
         background: #fefce8;
-        color: #a16207;
+        color: #92400e;
         padding: 0.35rem 0.85rem;
         border-radius: 20px;
         font-weight: 700;
         font-size: 0.88rem;
         display: inline-block;
-        border: 1px solid #fef08a;
+        border: 1px solid #fde047;
     }
 
     .badge-severity-severe {
         background: #fef2f2;
-        color: #b91c1c;
+        color: #991b1b;
         padding: 0.35rem 0.85rem;
         border-radius: 20px;
         font-weight: 700;
@@ -207,22 +283,22 @@ st.markdown(
         border-radius: 10px;
         font-weight: 700;
         padding: 0.6rem 1.4rem;
-        border: 1px solid #b8d4c1;
+        border: 1.5px solid #a3c9b1;
         background-color: #ffffff;
-        color: #174c35;
+        color: #0f3d2e;
         transition: all 0.2s ease;
     }
 
     div.stButton > button:hover {
         background-color: #e8f5ed;
         border-color: #1b5e3f;
-        color: #103b27;
+        color: #0a291f;
     }
 
     div.stButton > button[kind="primary"] {
         background-color: #1b5e3f !important;
         color: #ffffff !important;
-        border: 1px solid #1b5e3f !important;
+        border: 1.5px solid #1b5e3f !important;
     }
 
     div.stButton > button[kind="primary"]:hover {
@@ -230,10 +306,75 @@ st.markdown(
         box-shadow: 0 4px 12px rgba(27, 94, 63, 0.3);
     }
 
+    div.stDownloadButton > button {
+        border-radius: 10px;
+        font-weight: 700;
+        padding: 0.6rem 1.4rem;
+        border: 1.5px solid #1b5e3f;
+        background-color: #1b5e3f;
+        color: #ffffff !important;
+        transition: all 0.2s ease;
+    }
+
+    div.stDownloadButton > button:hover {
+        background-color: #12442c !important;
+        border-color: #12442c !important;
+        color: #ffffff !important;
+    }
+
     /* Sidebar Styling */
     [data-testid="stSidebar"] {
         background-color: #edf4ee;
         border-right: 1px solid var(--border-color);
+    }
+
+    [data-testid="stSidebar"] h1,
+    [data-testid="stSidebar"] h2,
+    [data-testid="stSidebar"] h3 {
+        color: #0f3d2e !important;
+    }
+
+    [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p,
+    [data-testid="stSidebar"] label {
+        color: #14281f !important;
+        font-weight: 700 !important;
+        font-size: 0.85rem !important;
+        letter-spacing: 0.5px;
+    }
+
+    [data-testid="stSidebar"] .stCaption {
+        color: #385243 !important;
+    }
+
+    /* Tabs Styling */
+    button[data-baseweb="tab"] {
+        font-family: 'Space Grotesk', sans-serif !important;
+        font-weight: 700 !important;
+        font-size: 0.92rem !important;
+        color: #3b5748 !important;
+    }
+
+    button[data-baseweb="tab"][aria-selected="true"] {
+        color: #0f3d2e !important;
+        border-bottom-color: #1b5e3f !important;
+    }
+
+    /* Expanders Styling */
+    [data-testid="stExpander"] {
+        background: #ffffff;
+        border: 1px solid var(--border-color);
+        border-radius: 12px !important;
+        margin-bottom: 0.75rem;
+    }
+
+    [data-testid="stExpander"] summary {
+        font-weight: 700 !important;
+        color: var(--primary-deep) !important;
+        font-size: 1.02rem !important;
+    }
+
+    [data-testid="stExpander"] summary:hover {
+        color: var(--primary) !important;
     }
 
     /* Dataframe / Table styling */
@@ -243,11 +384,29 @@ st.markdown(
         background: #ffffff;
     }
 
+    [data-testid="stDataFrame"] * {
+        color: var(--text-dark);
+    }
+
+    /* Widget Labels & Radio Buttons */
+    [data-testid="stWidgetLabel"] p,
+    [data-testid="stWidgetLabel"] label {
+        font-weight: 700 !important;
+        color: #14281f !important;
+        letter-spacing: 0.3px;
+    }
+
+    /* Callout & Alert contrast */
+    [data-testid="stAlert"] {
+        border-radius: 12px;
+        font-weight: 500;
+    }
+
     /* Custom Footer */
     .app-footer {
         text-align: center;
         padding: 2.5rem 0 1.5rem 0;
-        color: #617d6e;
+        color: #4a6355;
         font-size: 0.88rem;
         border-top: 1px solid #e1ebe3;
         margin-top: 3rem;
@@ -454,9 +613,9 @@ if navigation_choice == "🏠 Overview & Dashboard":
     st.markdown(
         """
         <div class="hero-banner">
-            <span class="hero-tag">🎓 FINAL YEAR ENGINEERING CAPSTONE</span>
-            <h1 class="hero-title">Automated Wheat Leaf Disease Diagnosis & Explainable AI</h1>
-            <p class="hero-subtitle">
+            <span class="hero-tag" style="color: #FFFFFF !important;">🎓 FINAL YEAR ENGINEERING CAPSTONE</span>
+            <h1 class="hero-title" style="color: #FFFFFF !important; font-weight: 700 !important; letter-spacing: -0.5px;">Automated Wheat Leaf Disease Diagnosis & Explainable AI</h1>
+            <p class="hero-subtitle" style="color: #E2F1E8 !important;">
                 An end-to-end intelligent agricultural vision system designed to detect, classify,
                 and interpret foliar wheat diseases in real-time. Built with a custom Deep Convolutional
                 Neural Network and Gradient-weighted Class Activation Mapping (Grad-CAM) to provide
@@ -581,9 +740,9 @@ elif navigation_choice == "🔬 AI Disease Diagnosis":
     st.markdown(
         """
         <div class="hero-banner" style="padding: 1.8rem 2.2rem; margin-bottom: 1.5rem;">
-            <span class="hero-tag">🔬 REAL-TIME INFERENCE & EXPLAINABLE AI</span>
-            <h2 style="color: #ffffff; margin: 0 0 0.5rem 0;">Wheat Foliar Disease Diagnosis</h2>
-            <p style="color: #e2f4e8; margin: 0; font-size: 0.95rem;">
+            <span class="hero-tag" style="color: #FFFFFF !important;">🔬 REAL-TIME INFERENCE & EXPLAINABLE AI</span>
+            <h2 style="color: #FFFFFF !important; font-weight: 700 !important; letter-spacing: -0.5px; margin: 0 0 0.5rem 0;">Wheat Foliar Disease Diagnosis</h2>
+            <p style="color: #E2F1E8 !important; margin: 0; font-size: 0.95rem;">
                 Upload a field leaf image, take a camera snapshot, or select a sample from the project dataset.
             </p>
         </div>
@@ -887,9 +1046,9 @@ elif navigation_choice == "📁 Batch Image Diagnosis":
     st.markdown(
         """
         <div class="hero-banner" style="padding: 1.8rem 2.2rem; margin-bottom: 1.5rem;">
-            <span class="hero-tag">📁 AUTOMATED BATCH PROCESSING</span>
-            <h2 style="color: #ffffff; margin: 0 0 0.5rem 0;">Batch Wheat Leaf Diagnostic Pipeline</h2>
-            <p style="color: #e2f4e8; margin: 0; font-size: 0.95rem;">
+            <span class="hero-tag" style="color: #FFFFFF !important;">📁 AUTOMATED BATCH PROCESSING</span>
+            <h2 style="color: #FFFFFF !important; font-weight: 700 !important; letter-spacing: -0.5px; margin: 0 0 0.5rem 0;">Batch Wheat Leaf Diagnostic Pipeline</h2>
+            <p style="color: #E2F1E8 !important; margin: 0; font-size: 0.95rem;">
                 Upload multiple wheat leaves simultaneously to perform high-throughput automated classification,
                 generate statistical disease distributions, and export tabular summaries.
             </p>
@@ -999,9 +1158,9 @@ elif navigation_choice == "🗂️ Dataset Explorer & Analytics":
     st.markdown(
         """
         <div class="hero-banner" style="padding: 1.8rem 2.2rem; margin-bottom: 1.5rem;">
-            <span class="hero-tag">🗂️ DATASET CURATION & DISTRIBUTION</span>
-            <h2 style="color: #ffffff; margin: 0 0 0.5rem 0;">Wheat Foliar Benchmark Dataset</h2>
-            <p style="color: #e2f4e8; margin: 0; font-size: 0.95rem;">
+            <span class="hero-tag" style="color: #FFFFFF !important;">🗂️ DATASET CURATION & DISTRIBUTION</span>
+            <h2 style="color: #FFFFFF !important; font-weight: 700 !important; letter-spacing: -0.5px; margin: 0 0 0.5rem 0;">Wheat Foliar Benchmark Dataset</h2>
+            <p style="color: #E2F1E8 !important; margin: 0; font-size: 0.95rem;">
                 Exploration of the 4,878 non-duplicate wheat leaf dataset utilized to train, validate,
                 and evaluate our custom deep convolutional network.
             </p>
@@ -1013,10 +1172,11 @@ elif navigation_choice == "🗂️ Dataset Explorer & Analytics":
     dataset_stats = scan_dataset_statistics()
     total_imgs = sum(dataset_stats.values()) if dataset_stats else 4878
 
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3 = st.columns([1, 1, 1.4])
     col1.metric("Total Filtered Images", f"{total_imgs:,}")
     col2.metric("Pathology Classes", len(CLASS_NAMES))
-    col3.metric("Dataset Path", str(DATASET_DIR) if DATASET_DIR else "D:\\non_dup_dataset")
+    display_dataset_path = str(DATASET_DIR) if DATASET_DIR else "D:\\non_dup_dataset"
+    col3.metric("Dataset Path", display_dataset_path, help=f"Dataset Root Directory: {display_dataset_path}")
 
     st.markdown("### 📊 Class Distribution & Imbalance Analysis")
 
@@ -1097,9 +1257,9 @@ elif navigation_choice == "📈 Model Performance & Benchmarks":
     st.markdown(
         """
         <div class="hero-banner" style="padding: 1.8rem 2.2rem; margin-bottom: 1.5rem;">
-            <span class="hero-tag">📈 RIGOROUS EMPIRICAL EVALUATION</span>
-            <h2 style="color: #ffffff; margin: 0 0 0.5rem 0;">Model Benchmarks & Ablation Study</h2>
-            <p style="color: #e2f4e8; margin: 0; font-size: 0.95rem;">
+            <span class="hero-tag" style="color: #FFFFFF !important;">📈 RIGOROUS EMPIRICAL EVALUATION</span>
+            <h2 style="color: #FFFFFF !important; font-weight: 700 !important; letter-spacing: -0.5px; margin: 0 0 0.5rem 0;">Model Benchmarks & Ablation Study</h2>
+            <p style="color: #E2F1E8 !important; margin: 0; font-size: 0.95rem;">
                 Comparative evaluation between the Baseline CNN and the Improved Regularized Deep CNN
                 evaluated on the unseen 488-image stratified test partition.
             </p>
@@ -1166,9 +1326,9 @@ elif navigation_choice == "📖 Wheat Pathology Encyclopedia":
     st.markdown(
         """
         <div class="hero-banner" style="padding: 1.8rem 2.2rem; margin-bottom: 1.5rem;">
-            <span class="hero-tag">📖 SCIENTIFIC AGRONOMY COMPENDIUM</span>
-            <h2 style="color: #ffffff; margin: 0 0 0.5rem 0;">Wheat Foliar Pathology Field Guide</h2>
-            <p style="color: #e2f4e8; margin: 0; font-size: 0.95rem;">
+            <span class="hero-tag" style="color: #FFFFFF !important;">📖 SCIENTIFIC AGRONOMY COMPENDIUM</span>
+            <h2 style="color: #FFFFFF !important; font-weight: 700 !important; letter-spacing: -0.5px; margin: 0 0 0.5rem 0;">Wheat Foliar Pathology Field Guide</h2>
+            <p style="color: #E2F1E8 !important; margin: 0; font-size: 0.95rem;">
                 Scientific reference detailing pathogen etiology, diagnostic hallmarks, environmental thresholds,
                 and Integrated Pest Management (IPM) protocols.
             </p>
@@ -1218,9 +1378,9 @@ elif navigation_choice == "🕒 Scan History & Audit Log":
     st.markdown(
         """
         <div class="hero-banner" style="padding: 1.8rem 2.2rem; margin-bottom: 1.5rem;">
-            <span class="hero-tag">🕒 AUDIT TRAIL & LOGS</span>
-            <h2 style="color: #ffffff; margin: 0 0 0.5rem 0;">Prediction Audit History</h2>
-            <p style="color: #e2f4e8; margin: 0; font-size: 0.95rem;">
+            <span class="hero-tag" style="color: #FFFFFF !important;">🕒 AUDIT TRAIL & LOGS</span>
+            <h2 style="color: #FFFFFF !important; font-weight: 700 !important; letter-spacing: -0.5px; margin: 0 0 0.5rem 0;">Prediction Audit History</h2>
+            <p style="color: #E2F1E8 !important; margin: 0; font-size: 0.95rem;">
                 Review, filter, and export the session diagnosis history recorded during application runtime.
             </p>
         </div>
